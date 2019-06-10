@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	u "github.com/string-unpacker/pkg/unpkr"
+	u "github.com/imorph/string-unpacker/pkg/unpkr"
 )
 
 
