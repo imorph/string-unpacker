@@ -12,3 +12,13 @@ Otus golang home work #2
 * "qwe\4\5" => "qwe45" (*)
 * "qwe\45" => "qwe44444" (*)
 * "qwe\\5" => "qwe\\\\\" (*)
+  
+## Usage example
+
+```shell
+export GO111MODULE=on
+git clone git@github.com:imorph/string-unpacker.git
+cd string-unpacker
+go build
+./string-unpacker
+```
