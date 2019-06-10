@@ -4,13 +4,15 @@ import (
 	"fmt"
 	"log"
 
-	u "github.com/imorph/string-unpacker/pkg/unpkr"
+	u "github.com/string-unpacker/pkg/unpkr"
 )
 
-func main() {
-	fmt.Println("\nlet's UNPACK!\nPress any time CTRL-C to exit\n")
 
-	var pkgString u.PackedString
+func main() {
+	fmt.Println("\nlet's UNPACK!\nPress any time CTRL-C to exit")
+	fmt.Println("")
+
+	var pkgString PackedString
 
 	for {
 		fmt.Print("Please enter a correct packed string: ")
@@ -19,7 +21,8 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		} else {
-			fmt.Println("Unpacked string: ", pkgString.Unpack(), "\n")
+			fmt.Println("Unpacked string: ", pkgString.Unpack())
+			fmt.Println("")
 		}
 	}
 }

@@ -2,33 +2,95 @@ package unpkr
 
 import (
 	"fmt"
+	"log"
+	"strconv"
+	"strings"
+	"unicode"
+	"unicode/utf8"
 )
 
 // Unpacker sees something packed, time to unpack!
 type Unpacker interface {
 	Unpack() string
-	validate() bool
 }
 
 // PackedString is string with repeated runes changed for numbers "aaaab"(unpacked) => "a4b" (packed)
 type PackedString string
 
+var lastRune, lastLetter rune
+var result, num strings.Builder
+var esc bool
+
 // Unpack implementation
 func (s PackedString) Unpack() string {
-	if !s.validate() {
-		return ""
-	}
-	for i, r := range s {
-		fmt.Println("i: ", i, "r: ", r)
+	result.Reset()
+	num.Reset()
+	lastRune = 0
+	lastLetter = 0
+	for i, curRune := range s {
+		// early return
+		if unicode.IsDigit(curRune) && i == 0 {
+			return ""
+		}
+		// if letter writing it to result and optionally unpacking previous sequence
+		if unicode.IsLetter(curRune) {
+			// letter after digit
+			if unicode.IsDigit(lastRune) {
+				numRunes, err := strconv.Atoi(num.String())
+				if err != nil {
+					log.Fatal(err)
+				}
+				for j := 0; j < numRunes-1; j++ {
+					result.WriteRune(lastLetter)
+				}
+				num.Reset()
+			}
+			// any letter
+			result.WriteRune(curRune)
+			lastLetter = curRune
+			lastRune = curRune
+		}
+		// write to digit sequence or flush letters to result
+		if unicode.IsDigit(curRune) {
+			// escape digit
+			if esc {
+				result.WriteRune(curRune)
+				lastLetter = curRune
+				lastRune = curRune
+				esc = false
+			} else {
+				// first digit of new digit sequence
+				if unicode.IsLetter(lastRune) {
+					num.Reset()
+				}
+				num.WriteRune(curRune)
+				lastRune = curRune
+				// last digit in input string
+				if i == utf8.RuneCountInString(string(s))-1 {
+					numRunes, err := strconv.Atoi(num.String())
+					if err != nil {
+						log.Fatal(err)
+					}
+					for j := 0; j < numRunes-1; j++ {
+						result.WriteRune(lastLetter)
+					}
+				}
+			}
+
+		}
+		if curRune == '\\' {
+			if lastRune == '\\' {
+				result.WriteRune(curRune)
+				lastLetter = curRune
+				lastRune = curRune
+				esc = false
+
+			} else {
+				esc = true
+				lastRune = curRune
+			}
+		}
 	}
 
-	return string(s)
-}
-
-// Validate will try to fast-check if PackedString is packed
-func (s PackedString) validate() bool {
-	if s == "45" {
-		return false
-	}
-	return true
+	return result.String()
 }
