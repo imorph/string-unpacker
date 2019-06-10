@@ -2,3 +2,5 @@ github.com/imorph/string-unpacker/pkg/unpkr v0.0.0-20190610021139-afc75e8d2c44 h
 github.com/imorph/string-unpacker/pkg/unpkr v0.0.0-20190610021139-afc75e8d2c44/go.mod h1:sPZa+fqZUqETnTX8n3SQKKZjk3UgcqOD084wCKpiuWg=
 github.com/imorph/string-unpacker/pkg/unpkr v0.0.1 h1:MrpVwg6+Zo4MqerBq67nZ/3Swu5dW6vwmgGDBC2pmp4=
 github.com/imorph/string-unpacker/pkg/unpkr v0.0.1/go.mod h1:sPZa+fqZUqETnTX8n3SQKKZjk3UgcqOD084wCKpiuWg=
+github.com/imorph/string-unpacker/pkg/unpkr v0.0.2 h1:8cC4FZ1Vaxz8ftneVk5z/sF8Ue4ck4tNlWpg8iaFf8U=
+github.com/imorph/string-unpacker/pkg/unpkr v0.0.2/go.mod h1:sPZa+fqZUqETnTX8n3SQKKZjk3UgcqOD084wCKpiuWg=
