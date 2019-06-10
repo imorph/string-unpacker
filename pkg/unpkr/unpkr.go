@@ -1,7 +1,6 @@
 package unpkr
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 	"strings"
