@@ -12,7 +12,7 @@ func main() {
 	fmt.Println("\nlet's UNPACK!\nPress any time CTRL-C to exit")
 	fmt.Println("")
 
-	var pkgString PackedString
+	var pkgString u.PackedString
 
 	for {
 		fmt.Print("Please enter a correct packed string: ")
