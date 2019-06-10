@@ -8,10 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Println("")
-	fmt.Println("let's UNPACK!")
-	fmt.Println("Press any time CTRL-C to exit")
-	fmt.Println("")
+	fmt.Println("\nlet's UNPACK!\nPress any time CTRL-C to exit\n")
 
 	var pkgString u.PackedString
 
@@ -22,8 +19,7 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		} else {
-			fmt.Println("Unpacked string: ", pkgString.Unpack())
-			fmt.Println("")
-		}
+			fmt.Println("Unpacked string: ", pkgString.Unpack(), "\n")
 		}
 	}
+}
