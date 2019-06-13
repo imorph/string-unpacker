@@ -16,12 +16,11 @@ type Unpacker interface {
 // PackedString is string with repeated runes changed for numbers "aaaab"(unpacked) => "a4b" (packed)
 type PackedString string
 
-var lastRune, lastLetter rune
-var result, num strings.Builder
-var esc bool
-
 // Unpack implementation
 func (s PackedString) Unpack() string {
+	var lastRune, lastLetter rune
+	var result, num strings.Builder
+	var esc bool
 	result.Reset()
 	num.Reset()
 	lastRune = 0
